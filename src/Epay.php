@@ -172,6 +172,24 @@ class Epay
     }
 
     /**
+     * Generate html hidden inputs
+     * @method generateHiddenInputs
+     * @param  string $successUrl Return after success
+     * @param  string $cancelUrl Return after cancel
+     * @return array
+     */
+    public function getInputsData($successUrl = FALSE, $cancelUrl = FALSE)
+    {
+        return [
+            'page' => 'paylogin',
+            'encoded' => $this->getData(),
+            'checksum' => $this->getChecksum(),
+            'url_ok' => $successUrl ? $successUrl : $this->config['success_url'],
+            'url_cancel' => $cancelUrl ? $cancelUrl : $this->config['cancel_url'],
+        ];
+    }
+
+    /**
      * Get data encoded with base64
      * @method getData
      * @return string  base64 encoded data
